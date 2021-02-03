@@ -2,6 +2,7 @@
 
 
 using System;
+using System.Text;      // Pour le StringBuilder
 // est la meme chose que : 
 // using namespace std;
 
@@ -220,6 +221,8 @@ class Program
 
         Console.WriteLine();
 
+        // Modification dans un tableau.
+
         string[] nomsMois = { "Janvier", "Fevrier", "Mars", "Mai" };
 
         Console.WriteLine("Mon deuxieme mois est " + tableauEntiers[1]);
@@ -249,9 +252,9 @@ class Program
         
         // Bin c'est ca la
 
-        foreach(char item in maChaine)
+        foreach(char lettre in maChaine)
         {
-            Console.WriteLine(item);
+            Console.WriteLine(lettre);
         }
 
         // Impossible de modifier le contenu d'un string.
@@ -307,6 +310,90 @@ class Program
         {
             Console.WriteLine("La chaine ne contient pas {0}!", aChercher);
         }
+
+        int index = maChaine.IndexOf("de");
+
+        Console.WriteLine("Le mot 'de' commence a la position : {0}",index);
+
+        // On recherche a partir de la position du "de" (index) + 1
+
+        index = maChaine.IndexOf("de",index+1);
+
+        Console.WriteLine("Le prochain 'de' commence a la position : {0}", index);
+
+        // Encore
+
+        index = maChaine.IndexOf("de", index + 1);
+
+        Console.WriteLine("Le prochain 'de' commence a la position : {0}", index);
+
+        // Ici on recoit un index de  -1 , ce qui veux dire qu'il n'a pas trouver le mot rechercher.
+
+        int l_index = maChaine.LastIndexOf("de");
+
+        Console.WriteLine("Le prochain 'de' commence a la position (LastIndexOf) : {0}", l_index);
+
+        // Extraire du string d'un autre string avec la position et la longueur du string qu'on veut.
+
+        string stringObtenu = maChaine.Substring(4, 6);
+
+        Console.WriteLine("Sous-chaine = {0}", stringObtenu);
+
+        
+        // All-caps
+
+        
+        Console.WriteLine("Tout en majuscule : {0}", maChaine.ToUpper());
+
+        // Allignement du texte dans la console
+
+        // 0:D_ : Chiffre decimaux , mettre des 0 devant un nombre _ de fois.
+        // 0:F_ : un peu comme setprecision en C++ , tres utile!
+        // X : Hexadecimal
+
+        // Il y en a plein d'autres! https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings
+
+        Console.WriteLine("Allignement du texte dans la console");
+        Console.WriteLine(" |{0,10}|{0,-10}|{1,8:X}|{2,6}|{2}|{3,12}|{3}|","allo",12,5,34.56789);
+
+        // using System.Text
+
+        maChaine = "bonjour le monde";
+
+        //Le StringBuilder garde une copie de la chaine
+        StringBuilder builder = new StringBuilder(maChaine);
+
+        builder[0] = 'B';
+
+        // On peut append presque tout les types.
+
+        builder.Append("! ");
+
+        builder.Append(123123);
+
+        // Inserer du texte a une position choisi
+
+        builder.Insert(8, "abcdefg ");
+
+        // Remove , a partir de la position 13 , enleve 2 caracteres
+
+        builder.Remove(13,2);
+
+        // Replace , on dit qu'elle SunString enlever et par quoi le remplacer.
+
+        builder.Replace("abcde", "tout");
+
+        builder.Replace(" ", ", ");
+
+        maChaine = builder.ToString();
+        Console.WriteLine(maChaine);
+
+        StringBuilder builder2 = new StringBuilder();   // Chaine vide
+
+        // Prend le format d'affichage de WriteLine()
+        builder2.AppendFormat(" |{0,10}|{0,-10}|{1,8:X}|{2,6}|{2}|{3,12}|{3}|", "allo", 12, 5, 34.56789);
+
+        Console.WriteLine(builder2);
 
     }
 }
