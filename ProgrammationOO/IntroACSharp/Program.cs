@@ -3,10 +3,12 @@
 
 using System;
 using System.Text;      // Pour le StringBuilder
-// est la meme chose que : 
-// using namespace std;
+using System.IO;        // Pour les fichiers.
 
-// L'ordre des fonctions n'est pas importante
+using Astronomie;
+
+// mais on peut pas mettre using Chimie;
+// Car il y aurait conflit / confususion
 
 class Program
 {
@@ -16,9 +18,12 @@ class Program
         //TestDeControles();
         //TestDeValeurs();
         //TestDeTableaux();
-        TestDeChainesDeCaracteres();
+        //TestDeChainesDeCaracteres();
+        //TestFichiers();
+        TestNamespaces();
 
-        Console.ReadKey();
+        Console.WriteLine("Commencement du main()");
+        Console.ReadKey(true);
         Console.Clear();
 
         // Readline prend ce qu'on ecrit sur la ligne
@@ -26,14 +31,16 @@ class Program
         string String = Console.ReadLine();
         Console.WriteLine("Input : " + String);
 
-        // ?
-        Console.ReadKey();
+        Console.ReadKey(true);
 
         // Il y a deja une pause a la fin du programme , donc dois-je en mettre une autre?
         // Oui , car cette pause est juste presente si activer sur Visual Studio.
 
 
     }
+
+    #region FonctionsDeBase
+
     static void TestDeBase()
     {
         // Simple message avec ) inclus.
@@ -194,6 +201,8 @@ class Program
         // nbre3 , aucun changement.
 
     }
+
+    #endregion
 
     static void TestDeTableaux()
     {
@@ -395,5 +404,74 @@ class Program
 
         Console.WriteLine(builder2);
 
+        // utilisation de new pour definir simplement la grosseur de notre array
+
+        Console.Write("Longueur de notre array?");
+        string lecture = Console.ReadLine();
+
+        int lecture_int = Convert.ToInt32(lecture);
+        int[] arrayNew = new int[lecture_int];
+
+    }
+
+    static void TestFichiers()
+    {
+        string nomFichier = "test.txt";
+
+        // Ecriture dans un fichier.
+        // On cree le fichier "test.txt" , mais s'il existe deja , on vas l'ecraser
+
+        // StreamWriter(nomFichier, true) vas ajouter a la fin si le fichier existe
+
+        // En utilisant true , on ecrit dans un fichier existant
+        // En utilisant false , on ecrase le fichier existant et on recommence
+
+        using (StreamWriter fichierEcriture = new StreamWriter(nomFichier,false))
+        {  
+            fichierEcriture.WriteLine("WriteLine dans un fichier externe!");
+            fichierEcriture.Write("Ici on vas ecrire quelque chose d'autre , sans changer de ligne");
+            fichierEcriture.WriteLine('!');
+        }
+        Console.WriteLine("Ecriture dans le fichier terminer!");
+        Console.WriteLine("Ouverture du fichier {0} en cours..", nomFichier);
+        System.Diagnostics.Process.Start("notepad.exe", nomFichier);
+
+        Console.WriteLine("Appuyez sur n'importe quel touche pour continuer et lire le fichier..");
+        Console.ReadKey(true);      // true affiche pas la touche appuyer
+
+        // Lecture d'un fichier
+
+        using(StreamReader fichierLecture = new StreamReader(nomFichier))
+        {
+            Console.WriteLine();
+            Console.WriteLine("*****");
+            // Le changement de ligne n'est pas inclus dans le string
+
+            string ligneFichier = fichierLecture.ReadLine();
+
+            // Tant qu'il y a du contenu a afficher : 
+
+            while (ligneFichier != null)
+            {
+                Console.WriteLine(ligneFichier);
+                ligneFichier = fichierLecture.ReadLine();
+            }
+        }
+
+        Console.WriteLine("*****");
+        Console.WriteLine("Fin de la lecture de notre fichier!");
+    }
+
+    static void TestNamespaces()
+    {
+        Console.WriteLine("Mercure en astronomie : " + Astronomie.Mercure.Description());
+        Console.WriteLine("Mercure en mythologie : " + Mythologie.Mercure.Description());
+        Console.WriteLine("Mercure en chimie : " + Chimie.Mercure.Description());
+
+        Console.WriteLine("Merci (using) : " + Mercure.Description());
+
     }
 }
+
+
+// int , bool , double , char , string != new type
