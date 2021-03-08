@@ -1,0 +1,5 @@
+Cheque;Arnaud;100
+Epargne;Benoit;325.5
+Cheque;Caroline;275.35
+Cheque;Denis;65.8
+Epargne;Eva;183.67

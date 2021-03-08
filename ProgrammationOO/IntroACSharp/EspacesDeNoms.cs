@@ -23,6 +23,7 @@ namespace Astronomie
    //class Jupiter { }
 }
 
+
 // Différents namespaces peuvent utiliser les mêmes noms
 namespace Mythologie
 {

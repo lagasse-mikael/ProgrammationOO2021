@@ -1,0 +1,46 @@
+# Une ligne débutant par # est un commentaire
+# Les commentaires et les lignes vides doivent être ignorées
+
+# Tous les champs sont séparés par des point-virgules ;
+
+# Chaque ligne indique une évaluation dans le format:
+#  - Type (caractère, 'E' pour Examen ou 'T' pour TP)
+#  - Nom (chaine de caractères)
+#  - Pondération (entier entre 0 et 100)
+#  - Date (A/M/J)
+# Si c'est un examen
+#  - Durée (H:M) (Heures entre 0 et 3, Minutes entre 0 et 59)
+# Si c'est un TP
+#  - Date de remise (A/M/J)
+
+E;Examen 1;15;2021/9/23;1:15
+T;TP 1;15;2021/9/23;2020/10/7
+E;Examen 2;20;2021/11/2;1:45
+T;TP Synthèse;20;2021/11/22;2021/12/13
+E;Examen Synthèse;30;2021/12/15;3:00
+
+#
+# Les lignes suivantes sont en erreurs
+#
+
+# Mauvais type
+X;Examen 1;15;2021/9/23;1:15
+EX;Examen 1;15;2021/9/23;1:15
+
+
+# Mauvaise pondération
+T;TP 1;-15;2021/9/23;2020/10/7
+T;TP 1;150;2021/9/23;2020/10/7
+T;TP 1;x;2021/9/23;2020/10/7
+
+
+# Mauvaise date/heure
+E;Examen 2;20;2021+11+2;1:45
+E;Examen 2;20;2021/31/2;1:45
+E;Examen 2;20;2021/11/2;6:45
+E;Examen 2;20;2021/11/2;1:75
+
+
+# Manque des valeurs
+T;TP Synthèse;20
+T;TP Synthèse;2021/11/22;2021/12/13

@@ -20,7 +20,8 @@ class Program
         //TestDeTableaux();
         //TestDeChainesDeCaracteres();
         //TestFichiers();
-        TestNamespaces();
+        //TestNamespaces();
+        Grep();
 
         Console.WriteLine("Commencement du main()");
         Console.ReadKey(true);
@@ -471,7 +472,45 @@ class Program
         Console.WriteLine("Merci (using) : " + Mercure.Description());
 
     }
+    static void Grep()
+    {
+        // TODO: Recommencer tant qu'une ligne non-vide est donnée
+
+        Console.Write("Entrez le texte à rechercher: ");
+        string aChercher = Console.ReadLine();
+        // Rechercher va afficher les lignes avec leur numéro dans lesquelles le texte est trouvé
+        int nombreDeLignes = Rechercher(aChercher, "prog.txt");
+        Console.WriteLine("\nTexte touvé dans {0} ligne{1}\n",
+           nombreDeLignes, (nombreDeLignes > 1 ? "s" : ""));
+    }
+
+    static int Rechercher(string aChercher,string fileName)
+    {
+        int Lines = 0;
+
+        using(StreamReader fichierLecture = new StreamReader(fileName))
+        {
+            string ligne;
+
+            ligne = fichierLecture.ReadLine();
+
+            while (ligne != null)
+            {
+                if(ligne.Contains(aChercher))
+                {
+                    Console.WriteLine("{0} : {1}", Lines, ligne);
+                }
+                ligne = fichierLecture.ReadLine();
+                ++Lines;
+            }
+        }
+
+        Console.ReadKey();
+
+        return 0;
+    }
 }
+
 
 
 // int , bool , double , char , string != new type
