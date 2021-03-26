@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarteAJouer.cs" />
+    <Compile Include="Deplacement.cs" />
+    <Compile Include="Etudiant.cs" />
+    <Compile Include="Exercices.cs" />
+    <Compile Include="Grille.cs" />
+    <Compile Include="Personne.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
